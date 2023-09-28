@@ -1,0 +1,20 @@
+:host {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: rgb(210, 206, 206);
+    margin: 5px;
+    border-radius: 5px;
+
+    .delete {
+      cursor: pointer;
+      color: red;
+      transition: all .5s ease-in-out;
+      &:hover {
+        scale: 1.5;
+      }
+    }
+  }
+}

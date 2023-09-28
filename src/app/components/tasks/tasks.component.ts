@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: 'app-tasks',
@@ -6,4 +7,6 @@ import { Component } from "@angular/core";
   styleUrls: ['./tasks.component.scss']
 })
 
-export class TasksComponent {}
+export class TasksComponent {
+  @Input() tasks$ = new BehaviorSubject<any>([]);
+}

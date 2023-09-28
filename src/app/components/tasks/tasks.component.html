@@ -1,2 +1,1 @@
-<h1>tasks</h1>
-<app-each-task></app-each-task>
+<app-each-task *ngFor="let task of tasks$ | async" [task]="task"></app-each-task>

@@ -1,1 +1,14 @@
-<h1>ADd Tasks</h1>
+<div class="form-container">
+  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    <label> Title:
+      <input type="text" name="title" formControlName="title"  />
+    </label>
+    <label> Description:
+      <textarea type="text" name="description" formControlName="description"></textarea>
+    </label>
+    <label class="check-box"> Completed:
+      <input type="checkbox" name="completed" formControlName="completed">
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</div>

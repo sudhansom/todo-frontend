@@ -1,1 +1,5 @@
-<button>submit</button>
+<button
+  class="button"
+  (click)="toogleAddBtn()"
+  [style]="{backgroundColor: (addBtn$ | async)? 'green' : 'orange', color: '#fff'}"
+>{{ (addBtn$ | async)? 'Add Task' : 'Show Tasks' }}</button>

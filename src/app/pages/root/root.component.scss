@@ -9,9 +9,8 @@
     .header {
       display: block;
       background-color: #123456;
-      height: 5vh;
       border-radius: 12px;
-      padding: 5px;
+      padding: 12px;
     }
 
     .main {
@@ -23,11 +22,13 @@
     }
 
     .footer {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
       background-color: #123456;
-      height: 5vh;
       border-radius: 12px;
-      padding: 5px;
+      padding: 9px;
     }
   }
 }
