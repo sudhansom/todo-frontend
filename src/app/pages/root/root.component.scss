@@ -1,0 +1,33 @@
+:host {
+  .container {
+    max-width: 500px;
+    margin: 50px auto;
+    border: 1px solid gray;
+    border-radius: 12px;
+    padding: 12px;
+
+    .header {
+      display: block;
+      background-color: #123456;
+      height: 5vh;
+      border-radius: 12px;
+      padding: 5px;
+    }
+
+    .main {
+      display: block;
+      background-color: #dee0e1;
+      border-radius: 12px;
+      padding: 5px;
+      margin-block: 12px;
+    }
+
+    .footer {
+      display: block;
+      background-color: #123456;
+      height: 5vh;
+      border-radius: 12px;
+      padding: 5px;
+    }
+  }
+}
