@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
+import { BehaviorSubject } from "rxjs";
 import { DataService } from "src/app/services/data.service";
 
 import { ITodo } from "src/app/types/types";
@@ -17,10 +18,12 @@ export class AddTaskComponent implements OnInit {
   @Output() editBtn = new EventEmitter<ITodo>();
   loggedIn$ = this._dataService.loggedIn$;
   editMode$ = this._dataService.editMode$;
+  showProgress$ = new BehaviorSubject(false);
 
   constructor(private _dataService: DataService){}
 
   onSubmit(){
+    this.showProgress$.next(true);
     const newTodo = {
       title: this.reactiveForm.value.title as string,
       description: this.reactiveForm.value.description as string,

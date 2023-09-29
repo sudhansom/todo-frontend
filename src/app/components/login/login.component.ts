@@ -37,8 +37,10 @@ export class LoginComponent implements OnInit {
         this._dataService.token$.next(data.token);
         this._dataService.loggedIn$.next(true);
         this._dataService.userId$.next(data.userId);
+        this._dataService.userName$.next(data.userName);
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('id', data.userId);
+        localStorage.setItem('userName', data.userName);
       }
     });
     this.wrongUser$.next(true);

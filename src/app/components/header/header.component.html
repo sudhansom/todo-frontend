@@ -1,5 +1,5 @@
 <div class="header">
   <h1>My Todos:</h1>
-  <p>loggedIn as: sudhan</p>
+  <p *ngIf="!!(userName$ | async)">loggedIn as: {{ userName$ | async}}</p>
   <app-button></app-button>
 </div>

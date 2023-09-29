@@ -12,4 +12,8 @@
     <button type="submit">{{(editMode$ | async)? 'Edit' : 'Create'}}</button>
   </form>
   <app-login *ngIf="!(loggedIn$ | async)"></app-login>
+  <div *ngIf="showProgress$ | async" class="progress-bar">
+    <p>Progressing...</p>
+  </div>
 </div>
+

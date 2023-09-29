@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, Observable, of } from "rxjs";
 
-import { ITodo, IResponse, IDataResponse } from "../types/types";
+import { ITodo, IResponse, IDataResponse, IUser, IResponseLogin } from "../types/types";
 
 
 @Injectable({
@@ -16,6 +16,7 @@ export class DataService {
   token$ = new BehaviorSubject('');
   userId$ = new BehaviorSubject(localStorage.getItem('id'));
   editMode$ = new BehaviorSubject(false);
+  userName$ = new BehaviorSubject(localStorage.getItem('userName'));
 
   apiUrl = "https://todo-backend-production-0288.up.railway.app/api/todo";
   userUrl ="https://todo-backend-production-0288.up.railway.app/api/users/login";// ** login only
@@ -48,7 +49,7 @@ export class DataService {
     return this._http.delete<IResponse>(`${this.apiUrl}/${id}`, {headers: headers} );
   }
 
-  loginUser(user: any): Observable<any> {
-    return this._http.post<any>(this.userUrl, user)
+  loginUser(user: IUser): Observable<IResponseLogin> {
+    return this._http.post<IResponseLogin>(this.userUrl, user);
   }
 }

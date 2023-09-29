@@ -1,5 +1,6 @@
 :host {
   .form-container {
+    position: relative;
     padding: 12px;
     form {
       display: flex;
@@ -28,6 +29,24 @@
         &:hover{
           background-color: rgb(202, 199, 199);
         }
+      }
+    }
+    .progress-bar {
+      position: absolute;
+      // left: 50%;
+      // top: 50%;
+      // transform: translate(-50%, -50%);
+      inset: 0;
+      background-color: rgba(148, 143, 143, 0.5);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        color: green;
+        filter: brightness(.6);
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }
