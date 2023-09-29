@@ -1,8 +1,10 @@
-<div class="container">
-  <p>{{task?.title}}</p>
-  <p>{{task?.description}}</p>
+<div class="container" [title]="task?.completed? 'Task Completed': 'Incomplete Task'">
+  <div class="tasks">
+    <p class="task">{{task?.title}}</p>
+    <p class="description">{{task?.description}}</p>
+  </div>
   <div class="icons">
-    <span (click)="editTask(task?.user)" class="edit" [smSvgIcon]="'edit'"></span>
-    <span (click)="deleteTask(task?.user)" class="delete" [smSvgIcon]="'delete'"></span>
+    <span title="edit task" (click)="editTask(task?.user)" class="edit" [smSvgIcon]="'edit'"></span>
+    <span title="delete task" (click)="deleteTask(task?.user)" class="delete" [smSvgIcon]="'delete'"></span>
   </div>
 </div>

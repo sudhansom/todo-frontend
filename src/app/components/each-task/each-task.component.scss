@@ -7,6 +7,21 @@
     background-color: rgb(236, 232, 232);
     margin: 5px;
     border-radius: 5px;
+    border-left: 2px solid orange;
+
+    .tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      @media(min-width: 768px){
+        flex-direction: row;
+        gap: 30px;
+      }
+      .task {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
 
     .icons {
       display: flex;
@@ -15,18 +30,19 @@
       align-items: center;
       .edit {
         cursor: pointer;
-        scale: .4;
+        scale: .3;
         transition: all .5s ease-in-out;
         &:hover {
-          scale: .5;
+          scale: .4;
         }
       }
       .delete {
         cursor: pointer;
+        scale: .7;
         fill: red;
         transition: all .5s ease-in-out;
         &:hover {
-          scale: 1.5;
+          scale: 1;
         }
       }
     }
@@ -38,6 +54,12 @@
       .delete, .edit {
         display: none;
       }
+    }
+  }
+
+  &.completed {
+    .container {
+      border-left: 2px solid green;
     }
   }
 }

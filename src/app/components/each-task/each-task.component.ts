@@ -32,4 +32,8 @@ export class EachTaskComponent {
   @HostBinding('class.others') get classs1(){
     return this.task?.user !== this._dataService.userId$.value;
   }
+
+  @HostBinding('class.completed') get class2(){
+    return this.task?.completed;
+  }
 }
