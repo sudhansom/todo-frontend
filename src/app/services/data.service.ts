@@ -15,6 +15,7 @@ export class DataService {
   showAddBtn$ = new BehaviorSubject(true);
   token$ = new BehaviorSubject('');
   userId$ = new BehaviorSubject(localStorage.getItem('id'));
+  editMode$ = new BehaviorSubject(false);
 
   apiUrl = "https://todo-backend-production-0288.up.railway.app/api/todo";
   userUrl ="https://todo-backend-production-0288.up.railway.app/api/users/login";// ** login only
@@ -33,11 +34,11 @@ export class DataService {
     })
     return this._http.post<IResponse>(this.apiUrl, {...todo, user: this.userId$.value}, {headers: headers} );
   }
-  editTodo(id: string, todo: ITodo): Observable<{success: boolean, message: string}>{
+  editTodo(todo: ITodo): Observable<{success: boolean, message: string}>{
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token$.value}`
     })
-    return this._http.put<IResponse>(`${this.apiUrl}/${id}`, {...todo, user: this.userId$.value}, {headers: headers} );
+    return this._http.put<IResponse>(`${this.apiUrl}/${todo?._id}`, {...todo, user: this.userId$.value}, {headers: headers} );
   }
 
   deleteTodo(id: string): Observable<IResponse>{

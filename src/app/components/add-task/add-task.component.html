@@ -9,7 +9,7 @@
     <label class="check-box"> Completed:
       <input type="checkbox" name="completed" formControlName="completed">
     </label>
-    <button type="submit">Submit</button>
+    <button type="submit">{{(editMode$ | async)? 'Edit' : 'Create'}}</button>
   </form>
   <app-login *ngIf="!(loggedIn$ | async)"></app-login>
 </div>

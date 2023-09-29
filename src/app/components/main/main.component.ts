@@ -36,6 +36,13 @@ export class MainComponent implements OnInit {
     });
   }
 
+  editTodo(newTodo: ITodo){
+    this._dataService.editTodo(newTodo).subscribe(data => {
+      this.fetchData();
+      this._dataService.showAddBtn$.next(true);
+    });
+  }
+
   deleteItem(id: string) {
     this._dataService.deleteTodo(id).subscribe(data => {
       console.log('main', data);
@@ -44,6 +51,7 @@ export class MainComponent implements OnInit {
   }
 
   editItem(id: string) {
+    this._dataService.editMode$.next(true);
     this.currentTodo = this.todos$.value.find(item => item._id === id)
     this._dataService.showAddBtn$.next(!this._dataService.showAddBtn$.value);
   }

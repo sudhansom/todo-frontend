@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px;
-    background-color: rgb(210, 206, 206);
+    background-color: rgb(236, 232, 232);
     margin: 5px;
     border-radius: 5px;
 
@@ -28,6 +28,15 @@
         &:hover {
           scale: 1.5;
         }
+      }
+    }
+  }
+
+  &.others {
+    .container {
+      background-color: rgb(245, 225, 225);
+      .delete, .edit {
+        display: none;
       }
     }
   }

@@ -1,4 +1,4 @@
 <div class="container">
-  <app-add-task (submitBtn)="createTodo($event)" *ngIf="!(addBtn$ | async)"></app-add-task>
+  <app-add-task (editBtn)="editTodo($event)" (submitBtn)="createTodo($event)" *ngIf="!(addBtn$ | async)" [task]="currentTodo"></app-add-task>
   <app-tasks (onEdit)="editItem($event)" (onDelete)="deleteItem($event)" *ngIf="!!(addBtn$ | async)" [tasks$]="todos$"></app-tasks>
 </div>

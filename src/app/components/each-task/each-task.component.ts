@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, HostBinding } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
 
 @Component({
@@ -28,5 +28,8 @@ export class EachTaskComponent {
     }else {
       alert('no permission ')
     }
+  }
+  @HostBinding('class.others') get classs1(){
+    return this.task?.user !== this._dataService.userId$.value;
   }
 }
