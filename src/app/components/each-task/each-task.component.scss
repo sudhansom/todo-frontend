@@ -8,12 +8,26 @@
     margin: 5px;
     border-radius: 5px;
 
-    .delete {
-      cursor: pointer;
-      color: red;
-      transition: all .5s ease-in-out;
-      &:hover {
-        scale: 1.5;
+    .icons {
+      display: flex;
+      height: 0;
+      gap: 12px;
+      align-items: center;
+      .edit {
+        cursor: pointer;
+        scale: .4;
+        transition: all .5s ease-in-out;
+        &:hover {
+          scale: .5;
+        }
+      }
+      .delete {
+        cursor: pointer;
+        fill: red;
+        transition: all .5s ease-in-out;
+        &:hover {
+          scale: 1.5;
+        }
       }
     }
   }

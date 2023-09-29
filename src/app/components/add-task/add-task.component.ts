@@ -11,6 +11,7 @@ import { DataService } from "src/app/services/data.service";
 export class AddTaskComponent implements OnInit {
   reactiveForm: FormGroup = new FormGroup<any>({});
   @Output() submitBtn = new EventEmitter();
+  loggedIn$ = this._dataService.loggedIn$;
 
   constructor(private _dataService: DataService){}
 
@@ -21,12 +22,9 @@ export class AddTaskComponent implements OnInit {
       completed: this.reactiveForm.value.completed,
       user: 'abcd',
     }
-    if(this._dataService.loggedIn$.value){
-      console.log(newTodo);
-      this.submitBtn.emit(newTodo);
-    }else {
-      console.log('NOt logged in....');
-    }
+    console.log(newTodo);
+    this.submitBtn.emit(newTodo);
+
   }
 
   ngOnInit(): void {

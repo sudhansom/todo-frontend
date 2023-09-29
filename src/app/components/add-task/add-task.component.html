@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="loggedIn$ | async"  [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
     <label> Title:
       <input type="text" name="title" formControlName="title"  />
     </label>
@@ -11,4 +11,5 @@
     </label>
     <button type="submit">Submit</button>
   </form>
+  <app-login *ngIf="!(loggedIn$ | async)"></app-login>
 </div>

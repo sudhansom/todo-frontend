@@ -1,1 +1,1 @@
-<app-each-task *ngFor="let task of tasks$ | async" [task]="task"></app-each-task>
+<app-each-task (onEdit)="editItem($event)" (onDelete)="deleteItem($event)" *ngFor="let task of tasks$ | async" [task]="task"></app-each-task>

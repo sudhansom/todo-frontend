@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnDestroy, OnInit, signal, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 interface IUser {
   userName: string,
@@ -14,10 +15,8 @@ interface IUser {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
-  @Output() onCancel = new EventEmitter();
-  @Output() onLoggedIn = new EventEmitter();
 
-  constructor(){}
+  constructor(private _dataService: DataService){}
 
 
   wrongUser$ = new BehaviorSubject(false);
@@ -31,14 +30,25 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     const user = {...this.reactiveForm.value};
-    console.log('user Details: ', user);
+    console.log(user);
+    this._dataService.loginUser(user).subscribe(data => {
+      console.log(data);
+      if(data?.success){
+        this._dataService.token$.next(data.token);
+        this._dataService.loggedIn$.next(true);
+        this._dataService.userId$.next(data.userId);
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('id', data.userId);
+      }
+    });
+    this.wrongUser$.next(true);
 
   }
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      userName: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required)
+      email: new FormControl('sudhan1@gmail.com', Validators.required),
+      password: new FormControl('poudel1', Validators.required)
     })
   }
 }

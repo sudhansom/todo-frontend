@@ -1,5 +1,8 @@
 <div class="container">
   <p>{{task?.title}}</p>
   <p>{{task?.description}}</p>
-  <span class="delete">x</span>
+  <div class="icons">
+    <span (click)="editTask(task?.user)" class="edit" [smSvgIcon]="'edit'"></span>
+    <span (click)="deleteTask(task?.user)" class="delete" [smSvgIcon]="'delete'"></span>
+  </div>
 </div>

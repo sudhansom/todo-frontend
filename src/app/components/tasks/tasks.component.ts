@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
@@ -9,4 +9,15 @@ import { BehaviorSubject } from "rxjs";
 
 export class TasksComponent {
   @Input() tasks$ = new BehaviorSubject<any>([]);
+  @Output() onDelete = new EventEmitter<string>();
+  @Output() onEdit = new EventEmitter<string>();
+
+  deleteItem(id: string){
+    this.onDelete.emit(id);
+  }
+
+  editItem(id: string){
+    this.onEdit.emit(id);
+  }
+
 }
