@@ -15,12 +15,12 @@ interface IUser {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DonationComponent {
-  price = 1000;
+  price = 10;
   donation = { items: [
     {
       product: 'https://thumbs.dreamstime.com/b/donate-money-vector-illustration-charity-donation-concept-hand-putting-banknote-box-eps-143816912.jpg',
       name: 'Donation',
-      price: this.price,
+      price: this.price * 100,
       quantity: 1,
       id: 1
     },
