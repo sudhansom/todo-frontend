@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+
 import { DataService } from 'src/app/services/data.service';
 
 interface IUser {
@@ -16,7 +18,10 @@ interface IUser {
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _dataService: DataService){}
+  constructor(
+    public ref: DynamicDialogRef,
+    public config: DynamicDialogConfig,
+    private _dataService: DataService){}
 
 
   wrongUser$ = new BehaviorSubject(false);
@@ -24,8 +29,7 @@ export class LoginComponent implements OnInit {
   reactiveForm: FormGroup = new FormGroup<any>({});
 
   cancelLogin(){
-    //this.onCancel.emit();
-    console.log('cancelled...');
+    this.ref.close();
   }
 
   onSubmit(){
@@ -41,6 +45,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('id', data.userId);
         localStorage.setItem('userName', data.userName);
+        this.ref.close();
       }
     });
     this.wrongUser$.next(true);

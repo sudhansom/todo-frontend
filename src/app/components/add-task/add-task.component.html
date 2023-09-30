@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form *ngIf="loggedIn$ | async"  [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
     <label> Title:
       <input type="text" name="title" formControlName="title"  />
     </label>
@@ -9,9 +9,9 @@
     <label class="check-box"> Completed:
       <input type="checkbox" name="completed" formControlName="completed">
     </label>
-    <button type="submit">{{(editMode$ | async)? 'Edit' : 'Create'}}</button>
+    <button [disabled]="!reactiveForm.valid" type="submit">{{(editMode$ | async)? 'Edit' : 'Create'}}</button>
   </form>
-  <app-login *ngIf="!(loggedIn$ | async)"></app-login>
+
   <div *ngIf="showProgress$ | async" class="progress-bar">
     <p>Progressing...</p>
   </div>

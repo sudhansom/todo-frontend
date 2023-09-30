@@ -1,9 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from "@angular/core";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Subscription } from "rxjs";
 import { DataService } from "src/app/services/data.service";
 
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
+import { PlatformLocation } from '@angular/common';
+
 import { ITodo } from "src/app/types/types";
+import { LoginComponent } from "../login/login.component";
 
 @Component({
   selector: 'app-add-task',
@@ -11,7 +16,12 @@ import { ITodo } from "src/app/types/types";
   styleUrls: ['./add-task.component.scss']
 })
 
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent implements OnInit, OnDestroy {
+  subscription?: Subscription;
+  private clearPopListener = this.platformLocation.onPopState(() => {
+    this.ref.close();
+  });
+
   reactiveForm: FormGroup = new FormGroup<any>({});
   @Input() task?: ITodo;
   @Output() submitBtn = new EventEmitter();
@@ -20,21 +30,30 @@ export class AddTaskComponent implements OnInit {
   editMode$ = this._dataService.editMode$;
   showProgress$ = new BehaviorSubject(false);
 
-  constructor(private _dataService: DataService){}
+  constructor(
+    private dialogService: DialogService,
+    private platformLocation: PlatformLocation,
+    public ref: DynamicDialogRef,
+    private _dataService: DataService,
+  ){}
 
   onSubmit(){
-    this.showProgress$.next(true);
-    const newTodo = {
+    if(this._dataService.loggedIn$.value){
+      this.showProgress$.next(true);
+      const newTodo = {
       title: this.reactiveForm.value.title as string,
       description: this.reactiveForm.value.description as string,
       completed: this.reactiveForm.value.completed as boolean,
     }
-    if(this.editMode$.value){
-      this.editBtn.emit({...newTodo, _id:this.task?._id});
-    }else {
-      this.submitBtn.emit(newTodo);
+      if(this.editMode$.value){
+        this.editBtn.emit({...newTodo, _id:this.task?._id});
+      }else {
+        this.submitBtn.emit(newTodo);
+      }
     }
-
+    else {
+      this.openModal();
+    }
   }
 
   ngOnInit(): void {
@@ -43,5 +62,27 @@ export class AddTaskComponent implements OnInit {
         description: new FormControl(this.task?.description),
         completed: new FormControl(this.task?.completed),
       })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.clearPopListener();
+  }
+
+  openModal(){
+    this.ref = this.dialogService.open(LoginComponent, {
+      contentStyle: { overflow: 'auto', padding: '20px', 'border-radius': '5px', 'background-color': 'rgb(236, 233, 233)', 'box-shadow': 'rgba(0, 0, 0, 0.35) 0px 5px 15px'},
+      showHeader: false,
+      modal: true,
+      dismissableMask: true,
+      style: {
+        minWidth: '300px',
+      },
+      // data: {
+      //   item: item,
+      //   allPersons: this.data$.getValue(),
+      //   description: `You can modify ${item?.name}'s details, add , update or delete children`,
+      // }
+    });
   }
 }
